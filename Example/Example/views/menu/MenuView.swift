@@ -11,6 +11,12 @@ struct MenuView: View {
     
     @ObservedObject var navModel : NavModel
     
+    let menuModelList : [MenuModel] = [
+        MenuModel(systemName: "person", title: "Profile"),
+        MenuModel(systemName: "envelope", title: "Messages"),
+        MenuModel(systemName: "gear", title: "setting")
+    ]
+    
     var body: some View {
         NavigationView {
             ZStack{
@@ -18,36 +24,11 @@ struct MenuView: View {
                     VStack(alignment: .leading){
                         Divider().background(Color(.white))
                             .padding(.top, 100)
-                        HStack {
-                            Image(systemName: "person")
-                                .foregroundColor(.white)
-                                .imageScale(.large)
-                            Text("Profile")
-                                .foregroundColor(.white)
-                                .font(.headline)
+                        ForEach(Array(menuModelList.enumerated()),
+                                id:\.offset) { i , menuModel in
+                            MenuItemView(menuModel: menuModel)
                         }
-                        .padding(.leading, 10)
-                        Divider().background(Color(.white))
-                        HStack {
-                            Image(systemName: "envelope")
-                                .foregroundColor(.white)
-                                .imageScale(.large)
-                            Text("Messages")
-                                .foregroundColor(.white)
-                                .font(.headline)
-                        }
-                        .padding(.leading, 10)
-                        Divider().background(Color(.white))
-                        HStack {
-                            Image(systemName: "gear")
-                                .foregroundColor(.white)
-                                .imageScale(.large)
-                            Text("Profile")
-                                .foregroundColor(.white)
-                                .font(.headline)
-                        }
-                        .padding(.leading, 10)
-                        Divider().background(Color(.white))
+                        
                         Spacer()
                     }
                 }
