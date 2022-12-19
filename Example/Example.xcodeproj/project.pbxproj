@@ -13,6 +13,10 @@
 		C7B168BA2950015400EB26E8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7B168B92950015400EB26E8 /* Preview Assets.xcassets */; };
 		C7B168C2295002D500EB26E8 /* NavView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B168C1295002D500EB26E8 /* NavView.swift */; };
 		C7B168C6295003FD00EB26E8 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B168C5295003FD00EB26E8 /* MainView.swift */; };
+		C7B168CA295021C500EB26E8 /* Any2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B168C9295021C500EB26E8 /* Any2View.swift */; };
+		C7B168CC295021D200EB26E8 /* Any1View.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B168CB295021D200EB26E8 /* Any1View.swift */; };
+		C7B168CF295024CB00EB26E8 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B168CE295024CB00EB26E8 /* MenuView.swift */; };
+		C7B168D8295026D800EB26E8 /* NavModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B168D7295026D800EB26E8 /* NavModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +27,10 @@
 		C7B168B92950015400EB26E8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C7B168C1295002D500EB26E8 /* NavView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavView.swift; sourceTree = "<group>"; };
 		C7B168C5295003FD00EB26E8 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		C7B168C9295021C500EB26E8 /* Any2View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Any2View.swift; sourceTree = "<group>"; };
+		C7B168CB295021D200EB26E8 /* Any1View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Any1View.swift; sourceTree = "<group>"; };
+		C7B168CE295024CB00EB26E8 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		C7B168D7295026D800EB26E8 /* NavModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +63,7 @@
 		C7B168B12950015100EB26E8 /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				C7B168D02950268E00EB26E8 /* common */,
 				C7B168C02950028F00EB26E8 /* views */,
 				C7B168B22950015100EB26E8 /* ExampleApp.swift */,
 				C7B168B42950015100EB26E8 /* ContentView.swift */,
@@ -75,6 +84,9 @@
 		C7B168C02950028F00EB26E8 /* views */ = {
 			isa = PBXGroup;
 			children = (
+				C7B168CD295024BD00EB26E8 /* menu */,
+				C7B168C8295021B800EB26E8 /* any2 */,
+				C7B168C7295021B400EB26E8 /* any1 */,
 				C7B168C4295003E200EB26E8 /* nav */,
 				C7B168C3295003DA00EB26E8 /* main */,
 			);
@@ -95,6 +107,86 @@
 				C7B168C5295003FD00EB26E8 /* MainView.swift */,
 			);
 			path = nav;
+			sourceTree = "<group>";
+		};
+		C7B168C7295021B400EB26E8 /* any1 */ = {
+			isa = PBXGroup;
+			children = (
+				C7B168CB295021D200EB26E8 /* Any1View.swift */,
+			);
+			path = any1;
+			sourceTree = "<group>";
+		};
+		C7B168C8295021B800EB26E8 /* any2 */ = {
+			isa = PBXGroup;
+			children = (
+				C7B168C9295021C500EB26E8 /* Any2View.swift */,
+			);
+			path = any2;
+			sourceTree = "<group>";
+		};
+		C7B168CD295024BD00EB26E8 /* menu */ = {
+			isa = PBXGroup;
+			children = (
+				C7B168CE295024CB00EB26E8 /* MenuView.swift */,
+			);
+			path = menu;
+			sourceTree = "<group>";
+		};
+		C7B168D02950268E00EB26E8 /* common */ = {
+			isa = PBXGroup;
+			children = (
+				C7B168D12950269800EB26E8 /* data */,
+			);
+			path = common;
+			sourceTree = "<group>";
+		};
+		C7B168D12950269800EB26E8 /* data */ = {
+			isa = PBXGroup;
+			children = (
+				C7B168D6295026B600EB26E8 /* model */,
+				C7B168D5295026B200EB26E8 /* nav */,
+				C7B168D4295026AC00EB26E8 /* request */,
+				C7B168D3295026A600EB26E8 /* response */,
+				C7B168D22950269C00EB26E8 /* page */,
+			);
+			path = data;
+			sourceTree = "<group>";
+		};
+		C7B168D22950269C00EB26E8 /* page */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = page;
+			sourceTree = "<group>";
+		};
+		C7B168D3295026A600EB26E8 /* response */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = response;
+			sourceTree = "<group>";
+		};
+		C7B168D4295026AC00EB26E8 /* request */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = request;
+			sourceTree = "<group>";
+		};
+		C7B168D5295026B200EB26E8 /* nav */ = {
+			isa = PBXGroup;
+			children = (
+				C7B168D7295026D800EB26E8 /* NavModel.swift */,
+			);
+			path = nav;
+			sourceTree = "<group>";
+		};
+		C7B168D6295026B600EB26E8 /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -167,10 +259,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7B168CF295024CB00EB26E8 /* MenuView.swift in Sources */,
 				C7B168C2295002D500EB26E8 /* NavView.swift in Sources */,
+				C7B168CA295021C500EB26E8 /* Any2View.swift in Sources */,
 				C7B168C6295003FD00EB26E8 /* MainView.swift in Sources */,
 				C7B168B52950015100EB26E8 /* ContentView.swift in Sources */,
 				C7B168B32950015100EB26E8 /* ExampleApp.swift in Sources */,
+				C7B168CC295021D200EB26E8 /* Any1View.swift in Sources */,
+				C7B168D8295026D800EB26E8 /* NavModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
