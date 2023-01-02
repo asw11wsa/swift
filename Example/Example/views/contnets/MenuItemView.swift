@@ -27,6 +27,8 @@ struct MenuItemView: View {
 
 struct MenuItemView_Previews: PreviewProvider {
     static var previews: some View {
-        MenuItemView(menuModel: MenuModel(systemName: "person",title:"Profile"))
+        Group {
+            MenuItemView(menuModel: MenuModel(systemName: "person",title:"Profile"))
+        }
     }
 }
