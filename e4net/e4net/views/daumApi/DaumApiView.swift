@@ -24,15 +24,13 @@ struct DaumApiView: View {
             self.bar = value
             print("value = \(value)")
             if(value.contains("roadAddress")){
-//                zip_addr = value.split(separator: ":")
-                print(value.split(separator: ":"))
-                print("roadAddress in DaumApiView")
+                zip_addr = String(value.split(separator: ":")[1])
             }else if(value.contains("zonecode")){
-                print("zonecode in DaumApiView")
+                zip_code = String(value.split(separator: ":")[1])
                 isShowApiView.toggle()
             }
         }
-        .navigationBarHidden(true)
+        .navigationBarHidden(false)
     }
 }
 

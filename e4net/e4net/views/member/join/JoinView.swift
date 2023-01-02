@@ -11,6 +11,8 @@ import AlertToast
 struct JoinView: View {
     @Binding var isShowJoinView: Bool
     @State var isShowApiView: Bool = false
+    @State private var joinDoneToast = false
+    @State private var doneMessage: String = ""
     @State private var joinSuccesToast = false
     @State private var successMessage: String = ""
     @State private var joinFailureToast = false
@@ -21,6 +23,7 @@ struct JoinView: View {
     @State var check_password: String = ""
     @State var name: String = ""
     @State var phone: String = ""
+    @State var phone_check: String = ""
     @State var email: String = ""
     @State var zip_code: String = ""
     @State var zip_addr: String = ""
@@ -28,13 +31,13 @@ struct JoinView: View {
     
     var body: some View {
         VStack{
-            ZStack{
+            HStack{
                 TextField("", text: $id)
                     .placeholder(when: id.isEmpty) {
                         Text("Username").foregroundColor(.gray)
                     }
                     .padding()
-                    .frame(width: 300, height: 40, alignment: .center)
+                    .frame(width: 150, height: 40, alignment: .center)
                     .background(Color(red: 211 / 255, green: 211 / 255, blue: 211 / 255))
                     .cornerRadius(15.0)
                     .foregroundColor(Color(.black))
@@ -58,6 +61,12 @@ struct JoinView: View {
                     )
                 }){
                     Text("id check")
+                        .padding()
+                        .frame(width: 140, height: 40, alignment: .center)
+                        .background(Color(red: 150 / 255, green: 150 / 255, blue: 150 / 255))
+                        .cornerRadius(15.0)
+                        .foregroundColor(Color(.black))
+                        .padding(.bottom, 15)
                 }
             }
             SecureField("", text: $password)
@@ -100,6 +109,45 @@ struct JoinView: View {
                 .cornerRadius(15.0)
                 .foregroundColor(Color(.black))
                 .padding(.bottom, 15)
+//            HStack{
+//                TextField("", text: $phone_check)
+//                    .placeholder(when: phone_check.isEmpty) {
+//                        Text("Zip Code").foregroundColor(.gray)
+//                    }
+//                    .padding()
+//                    .frame(width: 145, height: 40, alignment: .center)
+//                    .background(Color(red: 211 / 255, green: 211 / 255, blue: 211 / 255))
+//                    .cornerRadius(15.0)
+//                    .foregroundColor(Color(.black))
+//
+//                Button(action: {
+//                    HttpClient<ResIdcheck>().alamofireNetworkingGet(
+//                        url: "\(URLInfo.getIdcheckUrl())?membId=\(id)",
+//                        onSuccess: { (resData) in
+//                            print(resData.response)
+//                            if(resData.response == 0){
+//                                joinSuccesToast.toggle()
+//                                successMessage = "인증 성공"
+//                            }else{
+//                                joinFailureToast.toggle()
+//                                failureMessage = "인증 실패"
+//                            }
+//                        },
+//                        onFailure: {
+//                            joinFailureToast.toggle()
+//                        }
+//                    )
+//                }){
+//                    Text("id check")
+//                        .padding()
+//                        .frame(width: 140, height: 40, alignment: .center)
+//                        .background(Color(red: 150 / 255, green: 150 / 255, blue: 150 / 255))
+//                        .cornerRadius(15.0)
+//                        .foregroundColor(Color(.black))
+//                        .padding(.bottom, 15)
+//                }
+//            }
+//            .padding(.bottom, 15)
             TextField("", text: $email)
                 .placeholder(when: email.isEmpty) {
                     Text("Email").foregroundColor(.gray)
@@ -109,17 +157,35 @@ struct JoinView: View {
                 .background(Color(red: 211 / 255, green: 211 / 255, blue: 211 / 255))
                 .cornerRadius(15.0)
                 .foregroundColor(Color(.black))
-                .padding(.bottom, 15)
-            TextField("", text: $zip_code)
-                .placeholder(when: zip_code.isEmpty) {
-                    Text("Zip Code").foregroundColor(.gray)
+                .padding(.bottom, 25)
+            HStack{
+                TextField("", text: $zip_code)
+                    .placeholder(when: zip_code.isEmpty) {
+                        Text("Zip Code").foregroundColor(.gray)
+                    }
+                    .padding()
+                    .frame(width: 145, height: 40, alignment: .center)
+                    .background(Color(red: 211 / 255, green: 211 / 255, blue: 211 / 255))
+                    .cornerRadius(15.0)
+                    .foregroundColor(Color(.black))
+                
+                NavigationLink("",
+                               destination: DaumApiView(isShowApiView: $isShowApiView,zip_code:$zip_code,zip_addr:$zip_addr),
+                   isActive: $isShowApiView)
+                .background(Color(.blue))
+                
+                Button(action:{
+                    isShowApiView.toggle()
+                }){
+                    Text("주소 찾기")
+                        .padding()
+                        .frame(width: 140, height: 40, alignment: .center)
+                        .background(Color(red: 150 / 255, green: 150 / 255, blue: 150 / 255))
+                        .cornerRadius(15.0)
+                        .foregroundColor(Color(.black))
                 }
-                .padding()
-                .frame(width: 300, height: 40, alignment: .center)
-                .background(Color(red: 211 / 255, green: 211 / 255, blue: 211 / 255))
-                .cornerRadius(15.0)
-                .foregroundColor(Color(.black))
-                .padding(.bottom, 15)
+            }
+            .padding(.bottom, 15)
             TextField("", text: $zip_addr)
                 .placeholder(when: zip_addr.isEmpty) {
                     Text("Zip Address").foregroundColor(.gray)
@@ -140,7 +206,7 @@ struct JoinView: View {
                 .cornerRadius(15.0)
                 .foregroundColor(Color(.black))
                 .padding(.bottom, 15)
-            Group{
+            VStack{
                 Button {
                     let joinModel = JoinModel(
                         membId: id,
@@ -157,9 +223,11 @@ struct JoinView: View {
                         param: joinModel,
                         onSuccess: { (resData) in
                             print(resData.result)
-                            joinSuccesToast.toggle()
+                            doneMessage = "회원가입에 성공하였습니다."
+                            joinDoneToast.toggle()
                         },
                         onFailure: {
+                            failureMessage = "회원가입중 오류발생"
                             joinFailureToast.toggle()
                         }
                     )
@@ -182,21 +250,14 @@ struct JoinView: View {
                         .foregroundColor(Color(.white))
                         .padding(.bottom, 5)
                 }
-                
-                NavigationLink("",
-                               destination: DaumApiView(isShowApiView: $isShowApiView,zip_code:$zip_code,zip_addr:$zip_addr),
-                   isActive: $isShowApiView)
-                
-                Button(action:{
-                    isShowApiView.toggle()
-                }){
-                    Text("주소 찾기")
-                }
             }
             
         }
         .toast(isPresenting: $joinSuccesToast,duration: 0.9,alert:{
             AlertToast(type: .complete(Color.green), title: successMessage)
+        })
+        .toast(isPresenting: $joinDoneToast,duration: 0.9,alert:{
+            AlertToast(type: .complete(Color.green), title: doneMessage)
         },completion: {
             isShowJoinView.toggle()
         })

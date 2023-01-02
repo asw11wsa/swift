@@ -39,6 +39,7 @@ struct WebView: UIViewRepresentable, WebViewHandlerDelegate {
                     print(zonecode)
                     self.viewModel.bar.send("zonecode:\(zonecode)")
                 }
+                showView = false
             case "logout":
                 showView.toggle()
                 UserDefaults.standard.removeObject(forKey: "STOKEN")
